@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "2cccdc1e-ae38-45fa-abe8-63fe497f7ec5",
+		"name": "catfact",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19857625"
+	},
+	"item": [
+		{
+			"name": "Facts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var len = jsonData.length\r",
+							"var fact = jsonData.fact\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate that Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate that Status Massage is successful\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate that Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate that fact data type is string \", function () {\r",
+							"    pm.expect(jsonData.fact).to.be.a(\"string\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate that length data type is integar\", function () {\r",
+							"    pm.expect(jsonData.length).to.be.a(\"number\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate that length value\", function () {\r",
+							"    pm.expect(jsonData.length).to.eql(len);\r",
+							"    \r",
+							"});\r",
+							"pm.test(\"Validate that string length  = \" + fact.length, function () {\r",
+							"    pm.expect(fact.length).to.equal(len);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://catfact.ninja/fact",
+					"protocol": "https",
+					"host": [
+						"catfact",
+						"ninja"
+					],
+					"path": [
+						"fact"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
